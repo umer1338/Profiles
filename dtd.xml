@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE person[
+    <!ELEMENT person (name,age,email,(phone | mobile | telephone), entities)>
+    <!ELEMENT name (#PCDATA)>
+    <!ELEMENT age (#PCDATA)>
+    <!ELEMENT email (#PCDATA)>
+    <!ELEMENT phone (#PCDATA)>
+    <!ELEMENT entities (#PCDATA)>
+
+    <!ATTLIST name id CDATA #FIXED "12112">
+
+    <!ENTITY firstname "Ummer">
+    <!ENTITY lastname "Farooq">
+]>
+
+<person>
+    <name id="12112">Umer</name>
+    <age>Umer</age>
+    <email>umer@gmail.com</email>
+    <phone>0211122344</phone>
+    <entities>&firstname;&lastname;</entities>
+</person>

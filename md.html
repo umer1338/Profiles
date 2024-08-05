@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MDQ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        nav {
+            background-color: rgb(114, 11, 11);
+            color: white;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 10px;
+        }
+
+        a {
+            color: white;
+            text-decoration: none;
+            padding: 15px;
+        }
+
+
+        .navlinks {
+            display: flex;
+            align-items: center;
+        }
+
+
+        .mobile-menu {
+            display: none;
+        }
+
+        .mob {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .logo, i {
+            /* padding: 20px; */
+            font-size: 20px;
+        }
+
+
+        @media screen and (max-width: 750px) {
+            nav {
+                flex-direction: column;
+            }
+
+
+            .navlinks {
+                flex-direction: column;
+                background-color: white;
+                width: 90%;
+            }
+
+            a {
+                color: black;
+            }
+
+            .mobile-menu {
+                display: block;
+
+            }
+
+            .mob{
+                width:90%;
+                padding: 15px;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="mob">
+            <div class="logo">
+                Logo
+            </div>
+
+            <div class="mobile-menu">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+
+
+        <div class="navlinks">
+            <a href="#">HOME</a>
+            <a href="#">ABOUT</a>
+            <a href="#">SERVICES</a>
+            <a href="#">CONTACT</a>
+        </div>
+    </nav>
+</body>
+
+</html>

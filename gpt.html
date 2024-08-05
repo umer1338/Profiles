@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+    <style>
+        .card {
+            width: 280px;
+            height: 470px;
+            background-color: rgb(192, 192, 192);
+        }
+
+        img {
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .card-info {
+            display: flex;
+            justify-content: flex-start;
+            margin-left: 15px;
+        }
+
+        .add-items {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        #addtocart {
+            background-color: rgb(156, 67, 67);
+            padding: 10px 84px;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .increment {
+            margin-top: 15px;
+        }
+
+        #plus,
+        #minus {
+            background-color: black;
+            color: white;
+            font-weight: bolder;
+            font-size: large;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #disp {
+            padding: 5px 10px;
+            text-align: center;
+            color: black;
+            font-weight: bolder;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        .popup-div {
+            width: 50vw;
+            height: 50px;
+            background-color: rgb(21, 133, 21, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            display: none;
+            color: white;
+            position: fixed;
+            left: 25vw;
+            top: 5%;
+            animation: pop 0.2s ease-in;
+            transition: all 0.2s ease-out;
+        }
+
+        @keyframes pop {
+            0% {
+                transform: translateY(-100px);
+            }
+
+            50% {
+                transform: translateY(-50px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="popup-div" id="top">
+        <li id='popup-window'></li>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <img src="https://cdn.mos.cms.futurecdn.net/fsDKHB3ZyNJK6zMpDDBenB.jpg" alt="" height="310px">
+        </div>
+
+        <div class="card-info">
+            <h2 id="pname">Sony Headphones</h2>
+        </div>
+
+        <div class="add-items">
+            <div class="add-div">
+                <button id="addtocart">Add to Cart</button><br>
+            </div>
+
+            <div class="increment">
+                <button id="minus">-</button>
+                <input type="text" readonly placeholder="0" id="disp">
+                <button id="plus">+</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var count = 0;
+        var popupTimeout;
+
+        function showPopup(message, backgroundColor = 'rgb(21, 133, 21, 0.8)') {
+            clearTimeout(popupTimeout);
+
+            let top = document.getElementById("top");
+            let win = document.getElementById("popup-window");
+
+            win.innerText = message;
+            top.style.backgroundColor = backgroundColor;
+            top.style.display = "flex";
+            top.style.transform = "translateY(0px)";
+
+            popupTimeout = setTimeout(() => {
+                top.style.transform = "translateY(-100px)";
+                setTimeout(() => {
+                    top.style.display = "none";
+                }, 200); // Hide after transition
+            }, 3000); // Display duration
+        }
+
+        function addtocart() {
+            let disp = document.getElementById("disp");
+            if (count > 9) {
+                showPopup("YOU CAN'T ADD MORE THAN 10 ITEMS", 'rgb(156, 67, 67)');
+            }
+
+            else {
+                count++;
+                disp.value = count;
+                showPopup(`${count} ITEM(S) ADDED TO CART`);
+            }
+
+        }
+
+        function removesingle() {
+            let disp = document.getElementById("disp");
+            if (count > 0) {
+                count--;
+                disp.value = count;
+                showPopup("ITEM REMOVED FROM CART", 'rgb(156, 67, 67)');
+            }
+            else {
+                showPopup("NO ITEMS TO REMOVE", 'rgb(156, 67, 67)');
+            }
+        }
+
+        document.getElementById("addtocart").addEventListener("click", addtocart);
+        document.getElementById("plus").addEventListener("click", addtocart);
+        document.getElementById("minus").addEventListener("click", removesingle);
+    </script>
+</body>
+
+</html>

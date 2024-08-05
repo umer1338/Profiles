@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: "Noto Sans", sans-serif;
+            font-optical-sizing: auto;
+
+        }
+        body {
+            background-color: rgb(129, 129, 129);
+        }
+
+        .parent {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-color: rgb(129, 129, 129);
+            min-height: 90vh;
+        }
+
+        .box {
+            width: 50%;
+            padding: 25px;
+            background-color: rgba(141, 30, 185, 0.555);
+            border-radius: 10px;
+        }
+
+        h1,
+        input,
+        button {
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        h1 {
+            color: white;
+        }
+
+        input {
+            width: 84%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            height: 25px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: rgb(57, 153, 33);
+            border: 2px solid rgb(57, 153, 33);
+            color: white;
+            cursor: pointer;
+            transition: all 0.5s ease-in-out;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            border: 2px solid rgb(57, 153, 33);
+            background-color: white;
+            color: rgb(57, 153, 33);
+        }
+
+        .listdiv {
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        ol {
+            /* list-style: none; */
+            padding: 0;
+            width: 100%;
+        }
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            animation: listanimate 0.2s linear;
+            font-weight: bold;
+            font-size: large;
+        }
+
+        li button {
+            margin-left: 10px;
+        }
+
+        #addtask {
+            padding: 14px 10px;
+            border-radius: 5px;
+            background-color: black;
+            transition: all 0.5s linear;
+            border: 2px solid black;
+
+        }
+
+        #addtask:hover {
+            background-color: rgba(141, 30, 185, 0.555);
+            color: white;
+            border: 2px solid rgb(255, 255, 255);
+            cursor: pointer;
+        }
+
+        @keyframes listanimate {
+            0% {
+                transform: translateY(100%);
+                /* transform: rotate(90deg); */
+            }
+
+            50% {
+                transform: translateY(50%);
+                /* transform: rotate(180deg); */
+            }
+
+            100% {
+                transform: translateY(0%);
+                /* transform: rotate(360deg); */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="parent">
+        <div class="box">
+            <h1>Todo List</h1>
+            <input type="text" placeholder="Enter Task" id="task" required>
+            <button id="addtask">Add Task</button>
+
+            <div class="listdiv">
+                <ol id="classlist">
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        var count = 0
+        function add() {
+            //this is the input tag form html
+            let taskInput = document.getElementById("task");
+
+            //this is the value attribute from input tag
+            let task = taskInput.value;
+
+            //this is add task button from html
+            let addtask = document.getElementById("addtask");
+
+            //this is the ordered list tag from html
+            let classlist = document.getElementById("classlist");
+
+            //this is to check if the input field is empty then not submit
+            if (task === "") {
+                alert("Please Enter Task");
+                return;
+            }
+
+            //this is the count of the Tasks when adding task like task1,task2,task3
+            count++
+
+            //this is I created the new html li tag with javascript
+            let make = document.createElement('li');
+
+            //this is where i added the text into the li tag
+            make.innerText = `Task ${count} ` + task;
+
+
+            //this is where i created the new html button for done task
+            let del = document.createElement('button');
+
+            //this is the inner text of the button i created
+            del.innerText = 'Done';
+
+            //this is where i added the done button inside li
+            make.appendChild(del);
+
+            //this is where i added the li inside the ordered list tag
+            classlist.appendChild(make);
+
+            //this is where the input value is displaying nothing after adding task
+            taskInput.value = '';
+
+            //this is a click function on removing the li form ordered list 
+            del.addEventListener("click", function () {
+                
+                classlist.removeChild(make);
+                count--
+            });
+        }
+
+        //this is the add task button and added click listener on it
+        document.getElementById('addtask').addEventListener("click", add);
+    </script>
+</body>
+
+</html>
